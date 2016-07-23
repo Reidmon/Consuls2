@@ -986,7 +986,7 @@ for (var round = 1; round < 4; round++) {
 };
 
 $(document).ready(function() {
-	$.each( unit.fleet, function( index, value ){
+	$.each( UNIT.fleet, function( index, value ){
 		var wrapper = $(".input_fields"); //Fields wrapper
 		$(wrapper).append('<div>'+index+' <input type="text" name="'+index+'"/></div>'); //add input box
 	});
