@@ -988,19 +988,44 @@ for (var round = 1; round < 4; round++) {
 $(document).ready(function() {
   var result_id = 0;
 	$.each( UNIT.fleet, function( index, value ){
-		var wrapper = $(".input_fields"); //Fields wrapper
-		$(wrapper).append('<div>'+index+' <input type="text" name="'+index+'"/></div>'); //add input box
+		var wrapper = $(".input_fields1"); //Fields wrapper
+		$(wrapper).append('<div>'+index+' <input type="text" name="fleet['+index+']"/></div>'); //add input box
+	});
+	$.each( UNIT.reptiles, function( index, value ){
+		var wrapper = $(".input_fields2"); //Fields wrapper
+		$(wrapper).append('<div>'+index+' <input type="text" name="reptiles['+index+']"/></div>'); //add input box
+	});
+	$.each( UNIT.defense, function( index, value ){
+		var wrapper = $(".input_fields3"); //Fields wrapper
+		$(wrapper).append('<div>'+index+' <input type="text" name="defense['+index+']"/></div>'); //add input box
 	});
 
-	$("#my_form").on("submit", function(){
-		var result_example = "<h2>Результат #"+result_id+"</h2><b>";
+	$("#my_form").on("submit", function(){` `
+		var result_example = "<h2>Результат #"+result_id+"</h2><table><tr>";
 		result_id++;
-		$('input').each(function(index,data) {
+
+		result_example += "<td>";
+		$('input[name*="fleet"]').each(function(index,data) {
 			result_example += $(this).attr('name');
 			result_example += "<br/>";
-/*			alert($(this).val()); */
 		});
-		result_example += "</b>";
+		result_example += "</td>";
+
+		result_example += "<td>";
+		$('input[name*="reptiles"]').each(function(index,data) {
+			result_example += $(this).attr('name');
+			result_example += "<br/>";
+		});
+		result_example += "</td>";
+
+		result_example += "<td>";
+		$('input[name*="defense"]').each(function(index,data) {
+			result_example += $(this).attr('name');
+			result_example += "<br/>";
+		});
+		result_example += "</td>";
+
+		result_example += "</tr></table>";
 		$(".results").prepend(result_example);
 		return false;
 	});
