@@ -986,18 +986,23 @@ for (var round = 1; round < 4; round++) {
 };
 
 $(document).ready(function() {
+  var result_id = 0;
 	$.each( UNIT.fleet, function( index, value ){
 		var wrapper = $(".input_fields"); //Fields wrapper
 		$(wrapper).append('<div>'+index+' <input type="text" name="'+index+'"/></div>'); //add input box
 	});
 
 	$("#my_form").on("submit", function(){
+		var result_example = "<h2>Результат #"+result_id+"</h2><b>";
+		result_id++;
 		$('input').each(function(index,data) {
-			alert($(this).attr('name'));
-			alert($(this).val());
+			result_example += $(this).attr('name');
+			result_example += "<br/>";
+/*			alert($(this).val()); */
 		});
+		result_example += "</b>";
+		$(".results").prepend(result_example);
 		return false;
 	});
 });
-
-alert("+++");
+/* alert("+++"); */
