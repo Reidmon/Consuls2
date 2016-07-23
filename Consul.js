@@ -1000,30 +1000,36 @@ $(document).ready(function() {
 		$(wrapper).append('<div>'+index+' <input type="text" name="defense['+index+']"/></div>'); //add input box
 	});
 
-	$("#my_form").on("submit", function(){` `
+	$("#my_form").on("submit", function(){
 		var result_example = "<h2>Результат #"+result_id+"</h2><table><tr>";
 		result_id++;
 
-		result_example += "<td>";
-		$('input[name*="fleet"]').each(function(index,data) {
-			result_example += $(this).attr('name');
+		var result_example1 = "<td>";
+		var result_example2 = "<td>";
+		var result_example3 = "<td>";
+		$('input[type="text"]').each(function(index,data) {
+			var regExp1 = /([a-z]+)\[/;
+			var key1 = regExp1.exec($(this).attr('name'))[1];
+			var regExp2 = /\[([a-z]+)\]/;
+			var key2 = regExp2.exec($(this).attr('name'))[1];
+			var text = UNIT[key1][key2].name+" = "+ $(this).val();
 			result_example += "<br/>";
+			if (key1 == 'fleet') {
+				result_example1 += text+"<br/>";
+			}
+			else if (key1 == 'reptiles') {
+				result_example2 += text+"<br/>";
+			}
+			else if (key1 == 'defense') {
+				result_example3 += text+"<br/>";
+			}
 		});
-		result_example += "</td>";
-
-		result_example += "<td>";
-		$('input[name*="reptiles"]').each(function(index,data) {
-			result_example += $(this).attr('name');
-			result_example += "<br/>";
-		});
-		result_example += "</td>";
-
-		result_example += "<td>";
-		$('input[name*="defense"]').each(function(index,data) {
-			result_example += $(this).attr('name');
-			result_example += "<br/>";
-		});
-		result_example += "</td>";
+		result_example1 += "</td>";
+		result_example2 += "</td>";
+		result_example3 += "</td>";
+		result_example += result_example1;
+		result_example += result_example2;
+		result_example += result_example3;
 
 		result_example += "</tr></table>";
 		$(".results").prepend(result_example);
