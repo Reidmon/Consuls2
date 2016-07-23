@@ -1005,4 +1005,9 @@ $(document).ready(function() {
 		return false;
 	});
 });
-/* alert("+++"); */
+/*
+alert("+++");
+UNIT[key][key1].name
+UNIT[key][key1].num
+battleStats[key][key1].num
+*/
